@@ -3,7 +3,6 @@ import "./App.css";
 
 // Component Folder
 import ThemeToggle from "./components/ThemeToggle";
-import SearchBar from "./components/SearchBar";
 import ProfileCard from "./components/ProfileCard";
 import ProfileCard2 from "./components/ProfileCard2";
 

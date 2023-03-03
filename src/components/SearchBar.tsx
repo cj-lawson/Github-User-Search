@@ -18,7 +18,7 @@ const SearchBar = ({ onChange, onSubmit }: any) => {
               </div>
               <input
                 id="search"
-                className="block w-full shadow-lg shadow-[#DEE4F6] bg-gray-light dark:bg-gray-dark rounded-xl border border-transparent border-none py-2 pl-10 pr-3 pt-5 pb-5 leading-5 text-gray-900 placeholder-slate-400 focus:border-white focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 focus:ring-offset-transparent sm:text-sm"
+                className="block w-full shadow-lg shadow-[#DEE4F6] bg-gray-light dark:bg-gray-dark dark:shadow-transparent dark:text-slate-100 rounded-xl border border-transparent border-none py-2 pl-10 pr-3 pt-5 pb-5 leading-5 text-gray-900 placeholder-slate-400 focus:border-white focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 focus:ring-offset-transparent sm:text-sm"
                 placeholder="Search GitHub username..."
                 type="text"
                 name="search"

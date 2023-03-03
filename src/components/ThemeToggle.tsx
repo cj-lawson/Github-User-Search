@@ -8,15 +8,15 @@ const ThemeToggle = () => {
   return (
     <>
       <button
-        className="flex flex-row space-x-3"
+        className="flex flex-row space-x-3 items-center"
         onClick={() => setColorTheme(colorTheme)}
       >
         {colorTheme === "light" ? (
           <>
-            <h1 className="text-xs font-bold uppercase text-gray-tertiary">
+            <h1 className="text-xs font-bold uppercase text-slate-100">
               Light
             </h1>
-            <SunIcon className="w-5 text-gray-tertiary" />
+            <SunIcon className="w-5 text-slate-100" />
           </>
         ) : (
           <>

@@ -15,9 +15,6 @@ const useDarkMode = () => {
     root.classList.add(theme);
     // Update local storage
     localStorage.setItem("theme", theme);
-
-    console.log("useEffect has run!");
-
     // Dependency Array so useEffect only runs on state change
   }, [theme, colorTheme]);
 
