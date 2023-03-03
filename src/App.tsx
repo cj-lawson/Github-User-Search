@@ -5,18 +5,19 @@ import "./App.css";
 import ThemeToggle from "./components/ThemeToggle";
 import SearchBar from "./components/SearchBar";
 import ProfileCard from "./components/ProfileCard";
+import ProfileCard2 from "./components/ProfileCard2";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
 
   return (
-    <div className="bg-[#f6f8ff] dark:bg-[#141d2f] dark:text-slate-100 flex items-center justify-center h-screen p-7">
-      <div className="flex flex-col w-full max-w-xl">
+    <div className="bg-blue-light dark:bg-blue-dark dark:text-slate-100 flex items-center justify-center h-screen p-7">
+      <div className="flex flex-col w-full max-w-3xl">
         <div className="flex flex-row justify-between mb-8">
-          <h1>Devfinder</h1>
+          <h1 className="font-bold">devfinder</h1>
           <ThemeToggle />
         </div>
-        <ProfileCard />
+        <ProfileCard2 />
       </div>
     </div>
   );

@@ -24,13 +24,13 @@ const ThemeToggle = () => {
       <button className="flex flex-row space-x-3" onClick={toggleDarkMode}>
         {colorTheme === "light" ? (
           <>
-            <h1 className="uppercase">Light</h1>
-            <SunIcon className="w-5 text-slate-900" />
+            <h1 className="text-xs uppercase text-gray-tertiary">Light</h1>
+            <SunIcon className="w-5 text-gray-tertiary" />
           </>
         ) : (
           <>
-            <h1 className="uppercase">Dark</h1>
-            <MoonIcon className="w-5 text-slate-900" />
+            <h1 className="text-xs uppercase text-gray-tertiary">Dark</h1>
+            <MoonIcon className="w-5 text-gray-tertiary" />
           </>
         )}
       </button>

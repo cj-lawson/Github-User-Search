@@ -1,4 +1,5 @@
 import { useState, useEffect, useDebugValue } from "react";
+import useConvertDate from "../hooks/useConvertDate";
 import { ReactComponent as TwitterLogo } from "../assets/twitter.svg";
 import {
   MapPinIcon,
@@ -44,6 +45,7 @@ const ProfileCard = () => {
 
   return (
     <>
+      {/* searchbar */}
       <div className="mb-3">
         <SearchBar
           onChange={(e: any) => setSearchQuery(e.target.value)}
@@ -52,61 +54,79 @@ const ProfileCard = () => {
         />
       </div>
       {userData.map((value, i) => (
+        // Main Parent Grid container
         <div
-          className="flex flex-col p-4 space-y-8 mt-3 bg-[#fff] rounded-lg"
+          className="grid grid-cols-4 p-8 pt-10 gap-2 mt-3 bg-gray-light dark:gray-dark rounded-lg"
           key={i}
         >
-          <div className="flex flex-row">
-            {/* Profile Image */}
-            <div className="flex items-center mr-8">
-              <img
-                src={value.avatar_url}
-                className="object-cover object-center h-24 w-24 rounded-full"
-              />
-            </div>
-            {/* Profile Details */}
-            <div>
-              <h1>{value.name}</h1>
-              <h1>@{value.login}</h1>
-              <h1>Joined {value.created_at}</h1>
-            </div>
+          {/* Profile Image */}
+          <div className="">
+            <img
+              src={value.avatar_url}
+              className="object-cover object-center h-24 w-24 rounded-full"
+            />
           </div>
-          {/* Bio */}
-          <div>
-            <p>{value.bio}</p>
-          </div>
-          {/* Profile Stats */}
-          <div className="bg-[#F6F8FF] flex flex-row justify-between py-6 px-6 text-xs">
-            <div>
-              <h3>Repos</h3>
-              <h1>{value.public_repos}</h1>
+
+          {/* Profile Details */}
+          <div className="col-span-3 grid-flow-row auto-rows-min">
+            <div className="flex flex-row mb-8">
+              <div className="flex flex-col justify-between">
+                <h1>{value.name}</h1>
+                <h1 className="text-blue-crayola">@{value.login}</h1>
+                <h1 className="order-last">Joined {value.created_at}</h1>
+              </div>
             </div>
-            <div>
-              <h3>Followers</h3>
-              <h1>{value.followers}</h1>
+
+            {/* Bio */}
+            <div className="w-fit flex items-center mb-8">
+              <p className="shrink opacity-75 text-gray-secondary-dark">
+                {value.bio}
+              </p>
             </div>
-            <div>
-              <h3>Following</h3>
-              <h1>{value.following}</h1>
+
+            {/* Profile Stats */}
+            <div className="bg-blue-light dark:bg-blue-dark rounded-xl flex flex-row justify-between py-4 px-6 text-xs md:px-12 gap-y-8 mb-8">
+              <div>
+                <h3 className="text-xs text-gray-secondary-dark mb-1">Repos</h3>
+                <h1 className="text-xl font-bold text-gray-primary-dark">
+                  {value.public_repos}
+                </h1>
+              </div>
+              <div>
+                <h3 className="text-xs text-gray-secondary-dark mb-1">
+                  Followers
+                </h3>
+                <h1 className="text-xl font-bold text-gray-primary-dark">
+                  {value.followers}
+                </h1>
+              </div>
+              <div>
+                <h3 className="text-xs text-gray-secondary-dark mb-1">
+                  Following
+                </h3>
+                <h1 className="text-xl font-bold text-gray-primary-dark">
+                  {value.following}
+                </h1>
+              </div>
             </div>
-          </div>
-          {/* Social Links */}
-          <div className="grid-cols-4 space-y-3 text-[#4B6A9B] fill-[#4B6A9B]">
-            <div className="flex flex-row space-x-4">
-              <MapPinIcon className="w-5" />
-              <a href="">{value.location}</a>
-            </div>
-            <div className="flex flex-row space-x-4">
-              <LinkIcon className="w-5" />
-              <a href="">{value.blog}</a>
-            </div>
-            <div className="flex flex-row space-x-4">
-              <BuildingOffice2Icon className="w-5" />
-              <a href="">{value.company}</a>
-            </div>
-            <div className="flex flex-row space-x-4">
-              <TwitterLogo className="w-5 " />
-              <a href="">{value.twitter_username}</a>
+            {/* Social Links */}
+            <div className="content-center grid grid-cols-2 space-y-3 text-[#4B6A9B] fill-[#4B6A9B]">
+              <div className="flex flex-row space-x-4">
+                <MapPinIcon className="w-5" />
+                <a href="">{value.location}</a>
+              </div>
+              <div className="flex flex-row space-x-4">
+                <LinkIcon className="w-5" />
+                <a href="">{value.blog}</a>
+              </div>
+              <div className="flex flex-row space-x-4">
+                <BuildingOffice2Icon className="w-5" />
+                <a href="">{value.company}</a>
+              </div>
+              <div className="flex flex-row space-x-4">
+                <TwitterLogo className="w-5 " />
+                <a href="">{value.twitter_username}</a>
+              </div>
             </div>
           </div>
         </div>
