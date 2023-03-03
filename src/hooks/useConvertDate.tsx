@@ -1,15 +1,14 @@
-const date = new Date("2018-08-27T23:11:47Z");
-// Example Output
-// 25 Jan 2011
+/* Custom hook to format ISO String date */
 
-const useConvertDate = () => {
-  console.log(date.toString().slice(3, 15));
+const useConvertDate = (created_at: string) => {
+  // Create array from date object
+  const dateArray = String(new Date(created_at)).slice(4, 15).split(" ");
 
-  const stringDate = date.toString().slice(3, 15);
+  // Reorder array according to bizz requirments
+  [dateArray[0], dateArray[1]] = [dateArray[1], dateArray[0]];
 
-  for (let i = 0; i < stringDate.length - 5; i++) {}
-
-  return date.toString().slice(3, 15);
+  // Convert array back to string **Example Output --> 23 Jul 2017**
+  return dateArray.join(" ");
 };
 
 export default useConvertDate;
