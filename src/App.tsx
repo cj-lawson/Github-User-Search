@@ -4,7 +4,6 @@ import "./App.css";
 // Component Folder
 import ThemeToggle from "./components/ThemeToggle";
 import ProfileCard from "./components/ProfileCard";
-import ProfileCard2 from "./components/ProfileCard2";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -16,7 +15,7 @@ function App() {
           <h1 className="font-bold">devfinder</h1>
           <ThemeToggle />
         </div>
-        <ProfileCard2 />
+        <ProfileCard />
       </div>
     </div>
   );

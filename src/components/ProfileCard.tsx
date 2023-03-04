@@ -1,4 +1,4 @@
-import { useState, useEffect, useDebugValue } from "react";
+import { useState, useEffect } from "react";
 import useConvertDate from "../hooks/useConvertDate";
 import { ReactComponent as TwitterLogo } from "../assets/twitter.svg";
 import {
@@ -31,7 +31,6 @@ const ProfileCard = () => {
   async function fetchData() {
     const data = await (await fetch(`${githubURL}${searchQuery}`)).json();
     setUserData([data]);
-    console.log(searchQuery);
   }
 
   useEffect(() => {
@@ -46,71 +45,69 @@ const ProfileCard = () => {
   return (
     <>
       {/* searchbar */}
-      <div className="mb-3">
+      <div className="mb-10">
         <SearchBar
           onChange={(e: any) => setSearchQuery(e.target.value)}
           value={searchQuery}
           onSubmit={handleSubmit}
         />
       </div>
-      {userData.map((value, i) => (
-        // Main Parent Grid container
-        <div
-          className="grid grid-cols-4 p-8 pt-10 gap-2 mt-3 bg-gray-light dark:gray-dark rounded-lg"
-          key={i}
-        >
-          {/* Profile Image */}
-          <div className="">
-            <img
-              src={value.avatar_url}
-              className="object-cover object-center h-24 w-24 rounded-full"
-            />
-          </div>
 
-          {/* Profile Details */}
-          <div className="col-span-3 grid-flow-row auto-rows-min">
-            <div className="flex flex-row mb-8">
-              <div className="flex flex-col justify-between">
-                <h1>{value.name}</h1>
+      {userData.map((value, key) => (
+        <div
+          className="bg-[#FEFEFE] dark:bg-gray-dark dark:shadow-transparent p-10 rounded-3xl font-normal shadow-lg shadow-[#DEE4F6]"
+          key={key}
+        >
+          <div className="flex flex-col gap-y-8">
+            <div className="flex flex-row">
+              <img
+                src={value.avatar_url}
+                className="object-cover object-center h-24 w-24 rounded-full"
+              />
+              <div className="flex flex-col gap-y-2 ml-6">
+                <h1 className="text-xl font-bold text-gray-primary-dark dark:text-slate-100">
+                  {value.name}
+                </h1>
                 <h1 className="text-blue-crayola">@{value.login}</h1>
-                <h1 className="order-last">Joined {value.created_at}</h1>
+                <h1 className="text-gray-tertiary dark:text-slate-100  dark:opacity-95 order-last">
+                  Joined {useConvertDate(value.created_at)}
+                </h1>
               </div>
             </div>
-
-            {/* Bio */}
-            <div className="w-fit flex items-center mb-8">
-              <p className="shrink opacity-75 text-gray-secondary-dark">
+            <div>
+              <p className="shrink opacity-75 text-gray-secondary-dark dark:text-slate-100 order-last">
                 {value.bio}
               </p>
             </div>
-
             {/* Profile Stats */}
-            <div className="bg-blue-light dark:bg-blue-dark rounded-xl flex flex-row justify-between py-4 px-6 text-xs md:px-12 gap-y-8 mb-8">
+            <div className="bg-blue-light dark:bg-blue-dark rounded-xl flex flex-row justify-between py-4 px-6 text-xs md:px-12 gap-y-8">
               <div>
-                <h3 className="text-xs text-gray-secondary-dark mb-1">Repos</h3>
-                <h1 className="text-xl font-bold text-gray-primary-dark">
+                <h3 className="text-xs text-gray-secondary-dark dark:text-slate-100 dark:opacity-90 mb-1">
+                  Repos
+                </h3>
+                <h1 className="text-xl font-bold text-gray-primary-dark dark:text-slate-100">
                   {value.public_repos}
                 </h1>
               </div>
               <div>
-                <h3 className="text-xs text-gray-secondary-dark mb-1">
+                <h3 className="text-xs text-gray-secondary-dark dark:text-slate-100 dark:opacity-90 mb-1">
                   Followers
                 </h3>
-                <h1 className="text-xl font-bold text-gray-primary-dark">
+                <h1 className="text-xl font-bold text-gray-primary-dark dark:text-slate-100">
                   {value.followers}
                 </h1>
               </div>
               <div>
-                <h3 className="text-xs text-gray-secondary-dark mb-1">
+                <h3 className="text-xs text-gray-secondary-dark dark:text-slate-100 dark:opacity-90 mb-1">
                   Following
                 </h3>
-                <h1 className="text-xl font-bold text-gray-primary-dark">
+                <h1 className="text-xl font-bold text-gray-primary-dark dark:text-slate-100">
                   {value.following}
                 </h1>
               </div>
             </div>
             {/* Social Links */}
-            <div className="content-center grid grid-cols-2 space-y-3 text-[#4B6A9B] fill-[#4B6A9B]">
+            <div className="grid grid-rows-1 sm:grid-cols-2 text-gray-secondary-dark fill-gray-secondary-dark dark:text-slate-100 dark:fill-slate-100 gap-y-8">
               <div className="flex flex-row space-x-4">
                 <MapPinIcon className="w-5" />
                 <a href="">{value.location}</a>
