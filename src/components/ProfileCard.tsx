@@ -25,7 +25,7 @@ interface UserData {
 
 const ProfileCard = () => {
   const [userData, setUserData] = useState<UserData[]>([]);
-  const [searchQuery, setSearchQuery] = useState("spicybeefpho");
+  const [searchQuery, setSearchQuery] = useState("octocat");
   const githubURL = `https://api.github.com/users/`;
 
   async function fetchData() {
