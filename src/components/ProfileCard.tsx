@@ -7,6 +7,7 @@ import {
   BuildingOffice2Icon,
 } from "@heroicons/react/24/solid";
 import SearchBar from "./SearchBar";
+import ProfileCardSkeleton from "./ProfileCardSkeleton";
 
 interface UserData {
   avatar_url: string;
@@ -24,24 +25,58 @@ interface UserData {
 }
 
 const ProfileCard = () => {
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserData[]>([]);
   const [searchQuery, setSearchQuery] = useState("octocat");
   const githubURL = `https://api.github.com/users/`;
 
   async function fetchData() {
-    const data = await (await fetch(`${githubURL}${searchQuery}`)).json();
-    setUserData([data]);
+    try {
+      console.log("loading...");
+      setLoading(true);
+      const data = await (await fetch(`${githubURL}${searchQuery}`)).json();
+      setUserData([data]);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    fetchData();
+    fetchData().then(() => {
+      // setTimeout for showcasing loading states
+      setTimeout(() => {
+        setLoading(false);
+        console.log("done loading");
+      }, 2000);
+    });
   }, []);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    fetchData();
+    fetchData().then(() => {
+      // setTimeout for showcasing loading states
+      setTimeout(() => {
+        setLoading(false);
+        console.log("done loading");
+      }, 2000);
+    });
   };
 
+  if (loading) {
+    return (
+      <>
+        <div className="mb-10">
+          <SearchBar
+            onChange={(e: any) => setSearchQuery(e.target.value)}
+            value={searchQuery}
+            onSubmit={handleSubmit}
+          />
+        </div>
+        <ProfileCardSkeleton />
+      </>
+    );
+  }
   return (
     <>
       {/* searchbar */}
@@ -52,11 +87,10 @@ const ProfileCard = () => {
           onSubmit={handleSubmit}
         />
       </div>
-
       {userData.map((value, key) => (
         <div
-          className="bg-[#FEFEFE] dark:bg-gray-dark dark:shadow-transparent p-10 rounded-3xl font-normal shadow-lg shadow-[#DEE4F6]"
           key={key}
+          className="bg-[#FEFEFE] dark:bg-gray-dark dark:shadow-transparent p-10 rounded-3xl font-normal shadow-lg shadow-[#DEE4F6]"
         >
           <div className="flex flex-col gap-y-8">
             <div className="flex flex-row">
@@ -76,7 +110,11 @@ const ProfileCard = () => {
             </div>
             <div>
               <p className="shrink opacity-75 text-gray-secondary-dark dark:text-slate-100 order-last">
-                {value.bio}
+                {value.bio ? (
+                  value.bio
+                ) : (
+                  <p className="opacity-50">This profile has no bio</p>
+                )}
               </p>
             </div>
             {/* Profile Stats */}
@@ -109,20 +147,64 @@ const ProfileCard = () => {
             {/* Social Links */}
             <div className="grid grid-rows-1 sm:grid-cols-2 text-gray-secondary-dark fill-gray-secondary-dark dark:text-slate-100 dark:fill-slate-100 gap-y-8">
               <div className="flex flex-row space-x-4">
-                <MapPinIcon className="w-5" />
-                <a href="">{value.location}</a>
+                {value.location ? (
+                  <>
+                    <MapPinIcon className="w-5" />
+                    <a href="">{value.location}</a>
+                  </>
+                ) : (
+                  <>
+                    <MapPinIcon className="w-5 opacity-50" />
+                    <a href="" className="opacity-50">
+                      Not Available
+                    </a>
+                  </>
+                )}
               </div>
               <div className="flex flex-row space-x-4">
-                <LinkIcon className="w-5" />
-                <a href="">{value.blog}</a>
+                {value.blog ? (
+                  <>
+                    <LinkIcon className="w-5" />
+                    <a href="">{value.blog}</a>
+                  </>
+                ) : (
+                  <>
+                    <LinkIcon className="w-5 opacity-50" />
+                    <a href="" className="opacity-50">
+                      Not Available
+                    </a>
+                  </>
+                )}
               </div>
               <div className="flex flex-row space-x-4">
-                <BuildingOffice2Icon className="w-5" />
-                <a href="">{value.company}</a>
+                {value.company ? (
+                  <>
+                    <BuildingOffice2Icon className="w-5" />
+                    <a href="">{value.company}</a>
+                  </>
+                ) : (
+                  <>
+                    <BuildingOffice2Icon className="w-5 opacity-50" />
+                    <a href="" className="opacity-50">
+                      Not Available
+                    </a>
+                  </>
+                )}
               </div>
               <div className="flex flex-row space-x-4">
-                <TwitterLogo className="w-5 " />
-                <a href="">{value.twitter_username}</a>
+                {value.twitter_username ? (
+                  <>
+                    <TwitterLogo className="w-5 " />
+                    <a href="">{value.twitter_username}</a>
+                  </>
+                ) : (
+                  <>
+                    <TwitterLogo className="w-5 opacity-50" />
+                    <a href="" className="opacity-50">
+                      Not available
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>
