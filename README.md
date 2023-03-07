@@ -43,7 +43,7 @@ Users should be able to:
 
 ### Useful resources
 
-- [Reat beta docs] (https://beta.reactjs.org/) - Awesome new react docs with more modern funtional component examples
+- [React beta docs] (https://beta.reactjs.org/) - Awesome new react docs with more modern funtional component examples
 - [Tailwind CSS Docs] (https://tailwindcss.com/docs/installation) - Tailwind CSS Docs
 - [vite.js docs] (https://vitejs.dev/guide/static-deploy.html) - Helpful when trying to deploy a static site to github pages with vite
 
